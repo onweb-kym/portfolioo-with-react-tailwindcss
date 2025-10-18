@@ -1,9 +1,8 @@
-import React from "react";
 import "./index.css";
 
 function App() {
   // Estrellas animadas
-  const stars = Array.from({ length: 100 }, (_, i) => ({
+  const stars = Array.from({ length: 100 }, (_, _i) => ({
     top: `${Math.random() * 100}%`,
     left: `${Math.random() * 100}%`,
     animationDelay: `${Math.random() * 5}s`,
