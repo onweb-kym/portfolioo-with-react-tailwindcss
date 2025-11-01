@@ -1,14 +1,15 @@
 import "./index.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function App() {
   const [hoveringCircle, setHoveringCircle] = useState(false);
 
-  // Estrellas animadas
-  const stars = Array.from({ length: 100 }, () => ({
+  const stars = Array.from({ length: 100 }, (_, index) => ({
     top: `${Math.random() * 100}%`,
     left: `${Math.random() * 100}%`,
     animationDelay: `${Math.random() * 5}s`,
+    key: index,
   }));
 
   const infoItems = [
@@ -30,10 +31,9 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-black text-white font-sans overflow-hidden">
-      {/* Fondo animado de estrellas */}
-      {stars.map((star, index) => (
+      {stars.map((star) => (
         <div
-          key={index}
+          key={star.key}
           className="star"
           style={{
             top: star.top,
@@ -43,22 +43,18 @@ function App() {
         />
       ))}
 
-      {/* Contenido principal */}
       <div className="flex flex-col items-center justify-start min-h-screen z-10 relative text-center px-4 pt-8">
-        {/* Imagen de perfil */}
         <img
           src="/yorbys.jpeg"
           alt="Foto de perfil"
           className="w-48 h-48 rounded-full border-4 border-white shadow-lg object-cover mb-4"
         />
 
-        {/* Nombre y título */}
         <h1 className="text-5xl font-bold mb-2">Yorbys Montilla</h1>
         <p className="text-xl text-gray-300 mb-6">
           Estudiante de ingeniería de sistemas | Explorador del universo digital
         </p>
 
-        {/* Círculos interactivos */}
         <div className="flex space-x-6 mt-4">
           {infoItems.map((item, index) => (
             <div
@@ -77,54 +73,26 @@ function App() {
           ))}
         </div>
 
-        {/* Botón de contacto con animación */}
         <div
           className={`mt-8 flex justify-center transition-all duration-500 ${
             hoveringCircle ? "translate-y-20" : ""
           }`}
         >
-          <a
-            href="/contacto"
+          <Link
+            to="/contacto"
             className="bg-gray-600 hover:bg-gray-400 text-white font-semibold py-2 px-6 rounded-full transition shadow-md hover:scale-110"
           >
             Contáctame
-          </a>
+          </Link>
         </div>
 
-        {/* Footer */}
         <footer className="mt-24 text-sm text-gray-400">
           <div className="flex justify-center space-x-8 mb-4">
-            {/* Instagram */}
             <SocialLink
               href="https://www.instagram.com/tu_usuario"
               label="Instagram"
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5"
-                >
-                  <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z" />
-                </svg>
-              }
             />
-
-            {/* GitHub */}
-            <SocialLink
-              href="https://github.com/onweb-kym"
-              label="GitHub"
-              icon={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5"
-                >
-                  <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.36 6.84 9.71.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.61-3.37-1.37-3.37-1.37-.45-1.17-1.1-1.48-1.1-1.48-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.27 2.75 1.05a9.3 9.3 0 015 0c1.9-1.32 2.74-1.05 2.74-1.05.56 1.4.21 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.58.69.48A10.26 10.26 0 0022 12.26C22 6.58 17.52 2 12 2z" />
-                </svg>
-              }
-            />
+            <SocialLink href="https://github.com/onweb-kym" label="GitHub" />
           </div>
           <p>
             © {new Date().getFullYear()} Yorbys Montilla. Todos los derechos
@@ -136,25 +104,15 @@ function App() {
   );
 }
 
-// Componente reutilizable para enlaces sociales
-function SocialLink({
-  href,
-  label,
-  icon,
-}: {
-  href: string;
-  label: string;
-  icon: React.ReactNode;
-}) {
+function SocialLink({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center space-x-2 text-blue-400 hover:text-white transition"
+      className="text-blue-400 hover:text-white transition font-medium"
     >
-      {icon}
-      <span>{label}</span>
+      {label}
     </a>
   );
 }
