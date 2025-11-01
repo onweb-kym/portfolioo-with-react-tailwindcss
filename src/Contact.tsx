@@ -2,13 +2,13 @@ function Contact() {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center px-4">
       <div className="absolute top-4 left-4">
-  <a
-    href="/"
-    className="text-white bg-gray-700 hover:bg-gray-500 px-4 py-2 rounded-full shadow transition"
-  >
-    ← Volver
-  </a>
-</div>
+        <a
+          href="/"
+          className="text-white bg-gray-700 hover:bg-gray-500 px-4 py-2 rounded-full shadow transition"
+        >
+          ← Volver
+        </a>
+      </div>
 
       <form
         action="https://formsubmit.co/yorbysxd@gmail.com"
@@ -21,7 +21,7 @@ function Contact() {
         <input
           type="hidden"
           name="_next"
-          value="https://gc57wy-5173.csb.app/gracias"
+          value="https://lyq7dk-5173.csb.app/gracias"
         />
 
         <input
