@@ -8,7 +8,7 @@ function Gracias() {
         Gracias por contactarme. Te responderé pronto.
       </p>
       <a
-        href="/"
+        href="#/"
         className="bg-gray-600 hover:bg-gray-400 text-white font-semibold py-2 px-6 rounded-full transition shadow-md hover:scale-110"
       >
         Volver al inicio
