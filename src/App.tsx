@@ -1,5 +1,5 @@
 import "./index.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import YouTubeFavorites from "./components/YouTubeFavorites"; // Componente de músicas favoritas
 
@@ -39,6 +39,7 @@ function App() {
           key={star.key}
           className="star"
           style={{
+            position: "absolute",
             top: star.top,
             left: star.left,
             animationDelay: star.animationDelay,
@@ -111,7 +112,7 @@ function App() {
           ))}
         </div>
 
-        {/* Botón de contacto. */}
+        {/* Botón de contacto */}
         <div
           className={`mt-8 flex justify-center transition-all duration-500 ${
             hoveringCircle ? "translate-y-20" : ""
@@ -145,7 +146,8 @@ function App() {
 }
 
 function SocialLink({ href, label }: { href: string; label: string }) {
-  const icons: Record<string, JSX.Element> = {
+  // Cambio aplicado: React.ReactNode en lugar de JSX.Element
+  const icons: Record<string, React.ReactNode> = {
     Instagram: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +178,7 @@ function SocialLink({ href, label }: { href: string; label: string }) {
       className="text-blue-400 hover:text-white transition"
       aria-label={label}
     >
-      {icons[label]}
+      {icons[label] ?? label}
     </a>
   );
 }
