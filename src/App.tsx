@@ -111,7 +111,7 @@ function App() {
           ))}
         </div>
 
-        {/* Botón de contacto */}
+        {/* Botón de contacto. */}
         <div
           className={`mt-8 flex justify-center transition-all duration-500 ${
             hoveringCircle ? "translate-y-20" : ""
