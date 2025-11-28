@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fondo de estrellas */
 .star {
   position: absolute;
   width: 2px;
@@ -17,6 +18,137 @@
     opacity: 0.2;
   }
   50% {
+    opacity: 1;
+  }
+}
+
+/* Bloque completo */
+.typing-block {
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* Cada línea */
+.typing-line {
+  display: block;
+  overflow: hidden;
+  border-right: 2px solid #22d3ee; /* cursor */
+  white-space: nowrap;
+  line-height: 1rem;
+}
+
+/* Escritura */
+@keyframes typing-line {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Borrado → mantiene visible hasta que le toca */
+@keyframes erase-line {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}
+
+/* Cursor parpadeante */
+@keyframes blink {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #22d3ee;
+  }
+}
+
+/* Fase de escritura */
+.typing-block.writing .typing-line {
+  width: 0; /* arranca vacío */
+  animation: typing-line var(--write-per-line) steps(30, end) forwards,
+    blink 0.8s step-end infinite;
+  animation-fill-mode: forwards; /* conserva el estado escrito */
+}
+
+/* Fase de borrado */
+.typing-block.erasing .typing-line {
+  width: 100%; /* arranca llena */
+  animation: erase-line var(--erase-per-line) steps(30, end) forwards,
+    blink 0.8s step-end infinite;
+  animation-fill-mode: forwards; /* conserva visible hasta que se borre */
+}
+
+/* Delays de escritura */
+.typing-block.writing .typing-line:nth-child(1) {
+  animation-delay: 0s, 0s;
+}
+.typing-block.writing .typing-line:nth-child(2) {
+  animation-delay: calc(var(--write-per-line) * 1),
+    calc(var(--write-per-line) * 1);
+}
+.typing-block.writing .typing-line:nth-child(3) {
+  animation-delay: calc(var(--write-per-line) * 2),
+    calc(var(--write-per-line) * 2);
+}
+.typing-block.writing .typing-line:nth-child(4) {
+  animation-delay: calc(var(--write-per-line) * 3),
+    calc(var(--write-per-line) * 3);
+}
+.typing-block.writing .typing-line:nth-child(5) {
+  animation-delay: calc(var(--write-per-line) * 4),
+    calc(var(--write-per-line) * 4);
+}
+.typing-block.writing .typing-line:nth-child(6) {
+  animation-delay: calc(var(--write-per-line) * 5),
+    calc(var(--write-per-line) * 5);
+}
+
+/* Delays de borrado → cada línea se borra en orden */
+.typing-block.erasing .typing-line:nth-child(1) {
+  animation-delay: 0s, 0s;
+}
+.typing-block.erasing .typing-line:nth-child(2) {
+  animation-delay: calc(var(--erase-per-line) * 1),
+    calc(var(--erase-per-line) * 1);
+}
+.typing-block.erasing .typing-line:nth-child(3) {
+  animation-delay: calc(var(--erase-per-line) * 2),
+    calc(var(--erase-per-line) * 2);
+}
+.typing-block.erasing .typing-line:nth-child(4) {
+  animation-delay: calc(var(--erase-per-line) * 3),
+    calc(var(--erase-per-line) * 3);
+}
+.typing-block.erasing .typing-line:nth-child(5) {
+  animation-delay: calc(var(--erase-per-line) * 4),
+    calc(var(--erase-per-line) * 4);
+}
+.typing-block.erasing .typing-line:nth-child(6) {
+  animation-delay: calc(var(--erase-per-line) * 5),
+    calc(var(--erase-per-line) * 5);
+}
+
+/* Efecto neón */
+.neon-text {
+  text-shadow: 0 0 5px currentColor, 0 0 10px currentColor,
+    0 0 20px currentColor, 0 0 40px currentColor, 0 0 80px currentColor;
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
     opacity: 1;
   }
 }
